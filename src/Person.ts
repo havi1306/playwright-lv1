@@ -4,7 +4,7 @@ export class Person {
     private city: string
 
     constructor(name: string, age: number, city: string) {
-        if (name == "") {
+        if (!name || name.trim() === "") {
             throw new Error("Name is not empty");
         }
         this.name = name
@@ -15,8 +15,8 @@ export class Person {
         this.city = city
     }
 
-    great(): string {
-        return "Hi, I'm " + this.name + " from " + this.city + "."
+    greet(): string {
+        return `Hi, I'm ${this.name} from ${this.city}.`
     }
 
     celebrateBirthaday() {

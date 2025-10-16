@@ -8,7 +8,7 @@ async function main() {
 
     persons.forEach(person => {
         person.celebrateBirthaday()
-        console.log(person.great())
+        console.log(person.greet())
         console.log(`Is adult: ${person.isAdult()}`)
     })
     await repo.savePersonsToJSON(persons, outputPath)
