@@ -13,8 +13,8 @@ export class PersonRepository {
                 throw new Error('Invalid JSON format in the file')
             }
         } catch (error) {
-            if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
-                throw new Error(`File not found: ${jsonPath}`)
+            if (error instanceof SyntaxError) {
+                throw new Error('Invalid JSON format in the file')
             }
             throw error
         }
@@ -25,9 +25,6 @@ export class PersonRepository {
             const jsonData = JSON.stringify(persons.map(person => person.toJSON()), null, 2)
             await fs.promises.writeFile(outputPath, jsonData, 'utf8')
         } catch (error) {
-            if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
-                throw new Error(`Cannot write to file: Directory does not exist`)
-            }
             throw new Error(`Failed to save persons: ${(error as Error).message}`)
         }
     }
