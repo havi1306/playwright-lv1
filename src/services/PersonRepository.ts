@@ -14,7 +14,7 @@ export class PersonRepository {
             }
         } catch (error) {
             if (error instanceof SyntaxError) {
-                throw new Error('Invalid JSON format in the file')
+                throw new Error('File not found or unreadable')
             }
             throw error
         }
