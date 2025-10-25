@@ -1,11 +1,13 @@
 import { Page } from "@playwright/test";
-import { Product } from "../model/product";
+import { Product } from "../models/product";
+import { BasePage } from "./base.page";
 
-class CartPage {
-    readonly page: Page;
+class CartPage extends BasePage {
+    readonly checkoutButton;
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
+        this.checkoutButton = page.getByRole('link', { name: 'PROCEED TO CHECKOUT' })
     }
 
     async shouldProductDetailsCorrect(product: Product): Promise<void> {
@@ -17,6 +19,10 @@ class CartPage {
             })
             .getByRole('cell', { name: product.productPrice })
             .isVisible();
+    }
+
+    async proceedToCheckout(): Promise<void> {
+        await this.checkoutButton.click();
     }
 }
 export { CartPage }

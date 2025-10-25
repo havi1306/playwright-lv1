@@ -1,19 +1,17 @@
-import { _android, Locator, Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 import { BasePage } from "./base.page";
-import { Product } from "../model/product";
+import { Product } from "../models/product";
 
 class ProductDetailPage extends BasePage {
-    readonly page: Page;
     readonly addToCartButton: Locator;
     readonly productTitle: Locator;
     readonly productPrice: Locator;
 
     constructor(page: Page) {
         super(page);
-        this.page = page;
         this.addToCartButton = page.getByRole('button', { name: 'Add to cart' });
-        this.productTitle = page.getByRole('heading');
-        this.productPrice = page.getByRole('paragraph');
+        this.productTitle = page.getByRole('heading', { level: 1 });
+        this.productPrice = page.getByRole('paragraph').filter({ hasText: '$' });
     }
 
     getProductTitle(): Promise<string> {
@@ -26,6 +24,7 @@ class ProductDetailPage extends BasePage {
 
     async addToCart(): Promise<void> {
         await this.addToCartButton.click();
+        await this.page.waitForLoadState('networkidle');
     }
 
     async getProduct(): Promise<Product> {
