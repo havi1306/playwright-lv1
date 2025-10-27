@@ -8,7 +8,7 @@ class BasePage {
     }
 
     async navigateTo(url: string): Promise<void> {
-        this.page.goto(url);
+        await this.page.goto(url);
     }
 }
 export { BasePage }

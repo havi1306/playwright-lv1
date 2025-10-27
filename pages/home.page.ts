@@ -18,7 +18,7 @@ class HomePage extends BasePage {
     }
 
     async navigateToHomePage(): Promise<void> {
-        await this.navigateTo('https://demo.testarchitect.com/');
+        await this.navigateTo('');
         await this.closePopupButton.click();
     }
 

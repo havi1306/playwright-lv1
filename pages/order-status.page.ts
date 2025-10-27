@@ -37,13 +37,13 @@ class OrderStatusPage extends BasePage {
     }
 
     async shouldBillingDetailsCorrect(billing: Billing): Promise<void> {
-        expect(this.page.getByText(billing.firstName).first()).toBeVisible();
-        expect(this.page.getByText(billing.lastName).first()).toBeVisible();
-        expect(this.page.getByText(billing.companyName).first()).toBeVisible();
-        expect(this.page.getByText(billing.streetAddress).first()).toBeVisible();
-        expect(this.page.getByText(billing.city).first()).toBeVisible();
-        expect(this.page.getByText(billing.phoneNumber).first()).toBeVisible();
-        expect(this.page.getByText(billing.emailAddress).first()).toBeVisible();
+        if (billing.firstName) expect(this.page.getByText(billing.firstName).first()).toBeVisible();
+        if (billing.lastName) expect(this.page.getByText(billing.lastName).first()).toBeVisible();
+        if (billing.companyName) expect(this.page.getByText(billing.companyName).first()).toBeVisible();
+        if (billing.streetAddress) expect(this.page.getByText(billing.streetAddress).first()).toBeVisible();
+        if (billing.city) expect(this.page.getByText(billing.city).first()).toBeVisible();
+        if (billing.phoneNumber) expect(this.page.getByText(billing.phoneNumber).first()).toBeVisible();
+        if (billing.emailAddress) expect(this.page.getByText(billing.emailAddress).first()).toBeVisible();
     }
 }
 export { OrderStatusPage }

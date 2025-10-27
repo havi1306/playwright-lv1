@@ -14,12 +14,12 @@ class ProductDetailPage extends BasePage {
         this.productPrice = page.getByRole('paragraph').filter({ hasText: '$' });
     }
 
-    getProductTitle(): Promise<string> {
-        return this.productTitle.innerText();
+    async getProductTitle(): Promise<string> {
+        return await this.productTitle.innerText();
     }
 
-    getProductPrice(): Promise<string> {
-        return this.productPrice.innerText();
+    async getProductPrice(): Promise<string> {
+        return await this.productPrice.innerText();
     }
 
     async addToCart(): Promise<void> {

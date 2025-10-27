@@ -1,9 +1,12 @@
 import { test } from '../../fixtures/base.fixture';
 
+const username = process.env.USERNAME!;
+const password = process.env.PASSWORD!;
+
 test('TC01 | Verify users can buy an item successfully', async ({ homePage, myAccountPage, productCategoryPage, productDetailPage, cartPage, checkoutPage, orderStatusPage }) => {
     await homePage.navigateToHomePage();
     await homePage.goToMyAccount();
-    await myAccountPage.logIn('vi.pham@agest.vn', 'havi123');
+    await myAccountPage.logIn(username, password);
     await homePage.selectElectronicComponentsCategory();
     await productCategoryPage.shouldGridViewDisplayed();
     await productCategoryPage.clickListView();
