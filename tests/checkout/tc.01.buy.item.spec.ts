@@ -1,7 +1,16 @@
 import { test } from '../../fixtures/base.fixture';
 
-const username = process.env.USERNAME!;
+const username = process.env.USER!;
 const password = process.env.PASSWORD!;
+const billingDetails = {
+    firstName: 'Ha',
+    lastName: 'Vi',
+    companyName: 'Agest',
+    streetAddress: '123 TQT',
+    city: 'Da Nang',
+    phoneNumber: '123-456-7890',
+    emailAddress: 'vi.pham@agest.vn'
+};
 
 test('TC01 | Verify users can buy an item successfully', async ({ homePage, myAccountPage, productCategoryPage, productDetailPage, cartPage, checkoutPage, orderStatusPage }) => {
     await homePage.navigateToHomePage();
@@ -9,7 +18,7 @@ test('TC01 | Verify users can buy an item successfully', async ({ homePage, myAc
     await myAccountPage.logIn(username, password);
     await homePage.selectElectronicComponentsCategory();
     await productCategoryPage.shouldGridViewDisplayed();
-    await productCategoryPage.clickListView();
+    await productCategoryPage.switchViewTo('List');
     await productCategoryPage.shouldListViewDisplayed();
     await productCategoryPage.selectRandomProduct();
     await productDetailPage.addToCart();
@@ -18,7 +27,7 @@ test('TC01 | Verify users can buy an item successfully', async ({ homePage, myAc
     await cartPage.shouldProductDetailsCorrect(product);
     await cartPage.proceedToCheckout();
     await checkoutPage.shouldCheckoutPageDisplayed();
-    const billingDetails = await checkoutPage.getBillingDetails();
+    await checkoutPage.fillInBillingDetails(billingDetails);
     await orderStatusPage.placeOrder();
     await orderStatusPage.shouldOrderStatusPageDisplayed();
     await orderStatusPage.shouldOrderDetailsCorrect(product);

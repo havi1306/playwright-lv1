@@ -11,19 +11,17 @@ class ProductCategoryPage extends BasePage {
     constructor(page: Page) {
         super(page);
         this.products = page.locator('.products');
-        this.gridViewLink = page.getByRole('link', { name: ' Grid' });
-        this.listViewLink = page.getByRole('link', { name: ' List' });
+        this.gridViewLink = page.locator('.switcher-active').getByRole('link', { name: ' Grid' });
+        this.listViewLink = page.locator('.switcher-active').getByRole('link', { name: ' List' });
         this.productItems = page.getByRole('heading', { level: 2 });
     }
 
     async shouldGridViewDisplayed(): Promise<void> {
-        const parentDiv = this.gridViewLink.locator('..');
-        await expect.soft(parentDiv).toHaveClass(/switcher-active/);
+        await expect.soft(this.gridViewLink).toBeVisible();
     }
 
-    async clickListView(): Promise<void> {
-        const parentDiv = this.listViewLink.locator('..');
-        await parentDiv.click();
+    async switchViewTo(view: 'List' | 'Grid'): Promise<void> {
+        await this.page.locator(`.switch-${view.toLowerCase()}`).click();
     }
 
     async selectRandomProduct(): Promise<void> {
@@ -32,8 +30,7 @@ class ProductCategoryPage extends BasePage {
     }
 
     async shouldListViewDisplayed(): Promise<void> {
-        const parentDiv = this.listViewLink.locator('..');
-        await expect.soft(parentDiv).toHaveClass(/switcher-active/);
+        await expect.soft(this.listViewLink).toBeVisible;
     }
 
 }

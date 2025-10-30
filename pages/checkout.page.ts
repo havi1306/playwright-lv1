@@ -46,5 +46,15 @@ class CheckoutPage extends BasePage {
         );
     }
 
+    async fillInBillingDetails(billingDetails: Billing): Promise<void> {
+        if (billingDetails.firstName) await this.firstName.fill(billingDetails.firstName);
+        if (billingDetails.lastName) await this.lastName.fill(billingDetails.lastName);
+        if (billingDetails.companyName) await this.companyName.fill(billingDetails.companyName);
+        if (billingDetails.streetAddress) await this.streetAddress.fill(billingDetails.streetAddress);
+        if (billingDetails.city) await this.city.fill(billingDetails.city);
+        if (billingDetails.phoneNumber) await this.phoneNumber.fill(billingDetails.phoneNumber);
+        if (billingDetails.emailAddress) await this.emailAddress.fill(billingDetails.emailAddress);
+    }
+
 }
 export { CheckoutPage }
