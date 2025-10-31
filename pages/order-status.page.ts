@@ -4,17 +4,11 @@ import { Product } from "../models/product";
 import { Billing } from "../models/billing";
 
 class OrderStatusPage extends BasePage {
-    readonly placeOrderButton;
     readonly confirmationMessage: Locator;
 
     constructor(page: Page) {
         super(page);
-        this.placeOrderButton = page.getByRole('button', { name: 'Place order' });
         this.confirmationMessage = page.getByText('Thank you. Your order has');
-    }
-
-    async placeOrder(): Promise<void> {
-        await this.placeOrderButton.click();
     }
 
     async shouldOrderStatusPageDisplayed(): Promise<void> {
@@ -30,6 +24,12 @@ class OrderStatusPage extends BasePage {
             })
             .getByRole('cell', { name: product.productPrice })
             .isVisible();
+    }
+
+    async shouldOrderMutipleDetailsCorrect(products: Product[]): Promise<void> {
+        for (const product of products) {
+            await this.shouldOrderDetailsCorrect(product);
+        }
     }
 
     async shouldConfirmationMessageDisplayed(): Promise<void> {

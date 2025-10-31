@@ -10,6 +10,7 @@ class CheckoutPage extends BasePage {
     readonly city: Locator;
     readonly phoneNumber: Locator;
     readonly emailAddress: Locator;
+    readonly placeOrderButton: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -20,6 +21,11 @@ class CheckoutPage extends BasePage {
         this.city = page.getByRole('textbox', { name: 'Town / City *' });
         this.phoneNumber = page.getByRole('textbox', { name: 'Phone *' });
         this.emailAddress = page.getByRole('textbox', { name: 'Email address *' });
+        this.placeOrderButton = page.getByRole('button', { name: 'Place order' });
+    }
+
+    async placeOrder(): Promise<void> {
+        await this.placeOrderButton.click();
     }
 
     async shouldCheckoutPageDisplayed(): Promise<void> {

@@ -28,7 +28,7 @@ test('TC01 | Verify users can buy an item successfully', async ({ homePage, myAc
     await cartPage.proceedToCheckout();
     await checkoutPage.shouldCheckoutPageDisplayed();
     await checkoutPage.fillInBillingDetails(billingDetails);
-    await orderStatusPage.placeOrder();
+    await checkoutPage.placeOrder();
     await orderStatusPage.shouldOrderStatusPageDisplayed();
     await orderStatusPage.shouldOrderDetailsCorrect(product);
     await orderStatusPage.shouldConfirmationMessageDisplayed()

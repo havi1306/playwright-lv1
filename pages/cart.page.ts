@@ -24,5 +24,12 @@ class CartPage extends BasePage {
     async proceedToCheckout(): Promise<void> {
         await this.checkoutButton.click();
     }
+
+    async shouldMutipleProductDetailsCorrect(products: Product[]): Promise<void> {
+        for (const product of products) {
+            await this.shouldProductDetailsCorrect(product);
+        }
+    }
+
 }
 export { CartPage }
