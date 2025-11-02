@@ -3,7 +3,7 @@ import { test } from '../../fixtures/base.fixture';
 const username = process.env.USER!;
 const password = process.env.PASSWORD!;
 
-test('TC08 | Verify users can clear the cart', async ({ homePage, myAccountPage, productCategoryPage, productDetailPage, cartPage, checkoutPage, orderStatusPage }) => {
+test('TC08 | Verify users can clear the cart', async ({ homePage, myAccountPage, productCategoryPage, productDetailPage, cartPage }) => {
     await homePage.navigateToHomePage();
     await homePage.goToMyAccount();
     await myAccountPage.logIn(username, password);

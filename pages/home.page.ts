@@ -37,6 +37,7 @@ class HomePage extends BasePage {
 
     async goToCart(): Promise<void> {
         await this.cartIcon.click();
+        await this.page.waitForLoadState('networkidle');
     }
 
     async goToMyAccount(): Promise<void> {

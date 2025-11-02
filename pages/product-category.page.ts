@@ -29,6 +29,7 @@ class ProductCategoryPage extends BasePage {
     }
 
     async selectRandomProduct(): Promise<void> {
+        await this.page.waitForLoadState('networkidle');
         const productCount = await this.productItems.count();
         await this.productItems.nth(await getRandomIndex(productCount)).click();
     }
