@@ -6,8 +6,11 @@ const billingDetails = {
     firstName: 'Ha',
     lastName: 'Vi',
     companyName: 'Agest',
+    country: 'United States (US)',
     streetAddress: '123 TQT',
     city: 'Da Nang',
+    state: 'California',
+    zipCode: '',
     phoneNumber: '123-456-7890',
     emailAddress: 'vi.pham@agest.vn'
 };

@@ -5,10 +5,12 @@ import { Billing } from "../models/billing";
 
 class OrderStatusPage extends BasePage {
     readonly confirmationMessage: Locator;
+    readonly orderNumber: Locator;
 
     constructor(page: Page) {
         super(page);
         this.confirmationMessage = page.getByText('Thank you. Your order has');
+        this.orderNumber = page.getByRole('list').getByText('Order number:').getByRole('strong');
     }
 
     async shouldOrderStatusPageDisplayed(): Promise<void> {
@@ -44,6 +46,10 @@ class OrderStatusPage extends BasePage {
         if (billing.city) expect(this.page.getByText(billing.city).first()).toBeVisible();
         if (billing.phoneNumber) expect(this.page.getByText(billing.phoneNumber).first()).toBeVisible();
         if (billing.emailAddress) expect(this.page.getByText(billing.emailAddress).first()).toBeVisible();
+    }
+
+    async getOrderNumber(): Promise<string> {
+        return await this.orderNumber.innerText();
     }
 }
 export { OrderStatusPage }
