@@ -7,14 +7,16 @@ class HomePage extends BasePage {
     readonly allDepartmentsButton: Locator
     readonly cartIcon: Locator;
     readonly header: Locator;
+    readonly shopButton: Locator;
 
     constructor(page: Page) {
         super(page);
         this.header = page.getByRole('banner');
-        this.closePopupButton = page.getByRole('button', { name: 'Close' })
-        this.logInAndSignUpButton = this.header.getByRole('link', { name: 'Log in / Sign up' })
-        this.allDepartmentsButton = this.header.getByText('All departments')
+        this.closePopupButton = page.getByRole('button', { name: 'Close' });
+        this.logInAndSignUpButton = this.header.locator('.login-link');
+        this.allDepartmentsButton = this.header.getByText('All departments');
         this.cartIcon = this.header.getByRole('link').filter({ hasText: '$' });
+        this.shopButton = this.header.getByRole('link', { name: 'shop' });
     }
 
     async navigateToHomePage(): Promise<void> {
@@ -35,12 +37,16 @@ class HomePage extends BasePage {
 
     async goToCart(): Promise<void> {
         await this.cartIcon.click();
+        await this.page.waitForLoadState('networkidle');
     }
 
     async goToMyAccount(): Promise<void> {
         await this.logInAndSignUpButton.click();
     }
 
+    async goToShopPage(): Promise<void> {
+        await this.shopButton.click();
+    }
 }
 
 export { HomePage }

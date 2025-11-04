@@ -4,17 +4,13 @@ import { Product } from "../models/product";
 import { Billing } from "../models/billing";
 
 class OrderStatusPage extends BasePage {
-    readonly placeOrderButton;
     readonly confirmationMessage: Locator;
+    readonly orderNumber: Locator;
 
     constructor(page: Page) {
         super(page);
-        this.placeOrderButton = page.getByRole('button', { name: 'Place order' });
         this.confirmationMessage = page.getByText('Thank you. Your order has');
-    }
-
-    async placeOrder(): Promise<void> {
-        await this.placeOrderButton.click();
+        this.orderNumber = page.getByRole('list').getByText('Order number:').getByRole('strong');
     }
 
     async shouldOrderStatusPageDisplayed(): Promise<void> {
@@ -32,6 +28,12 @@ class OrderStatusPage extends BasePage {
             .isVisible();
     }
 
+    async shouldOrderDetailsDisplayed(products: Product[]): Promise<void> {
+        for (const product of products) {
+            await this.shouldOrderDetailsCorrect(product);
+        }
+    }
+
     async shouldConfirmationMessageDisplayed(): Promise<void> {
         await expect(this.confirmationMessage).toBeVisible();
     }
@@ -44,6 +46,10 @@ class OrderStatusPage extends BasePage {
         if (billing.city) expect(this.page.getByText(billing.city).first()).toBeVisible();
         if (billing.phoneNumber) expect(this.page.getByText(billing.phoneNumber).first()).toBeVisible();
         if (billing.emailAddress) expect(this.page.getByText(billing.emailAddress).first()).toBeVisible();
+    }
+
+    async getOrderNumber(): Promise<string> {
+        return await this.orderNumber.innerText();
     }
 }
 export { OrderStatusPage }

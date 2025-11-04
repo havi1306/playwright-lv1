@@ -6,8 +6,11 @@ const billingDetails = {
     firstName: 'Ha',
     lastName: 'Vi',
     companyName: 'Agest',
+    country: 'United States (US)',
     streetAddress: '123 TQT',
     city: 'Da Nang',
+    state: 'California',
+    zipCode: '12345',
     phoneNumber: '123-456-7890',
     emailAddress: 'vi.pham@agest.vn'
 };
@@ -28,7 +31,7 @@ test('TC01 | Verify users can buy an item successfully', async ({ homePage, myAc
     await cartPage.proceedToCheckout();
     await checkoutPage.shouldCheckoutPageDisplayed();
     await checkoutPage.fillInBillingDetails(billingDetails);
-    await orderStatusPage.placeOrder();
+    await checkoutPage.placeOrder();
     await orderStatusPage.shouldOrderStatusPageDisplayed();
     await orderStatusPage.shouldOrderDetailsCorrect(product);
     await orderStatusPage.shouldConfirmationMessageDisplayed()
