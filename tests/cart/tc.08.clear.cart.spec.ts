@@ -14,5 +14,5 @@ test('TC08 | Verify users can clear the cart', async ({ homePage, myAccountPage,
     await homePage.goToCart();
     await cartPage.shouldProductDetailsCorrect(product);
     await cartPage.clearShoppingCart();
-    await cartPage.shouldCartEmtyMessageDisplayed();
+    await cartPage.shouldCartEmptyMessageDisplayed();
 })

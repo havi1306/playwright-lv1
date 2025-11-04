@@ -4,7 +4,7 @@ import { test } from '../../fixtures/base.fixture';
 const username = process.env.USER!;
 const password = process.env.PASSWORD!;
 
-test('TC04 | Verify users can sort items by price', async ({ homePage, myAccountPage, productCategoryPage, productDetailPage, cartPage, checkoutPage, orderStatusPage }) => {
+test('TC04 | Verify users can sort items by price', async ({ homePage, myAccountPage, productCategoryPage }) => {
     await homePage.navigateToHomePage();
     await homePage.goToMyAccount();
     await myAccountPage.logIn(username, password);

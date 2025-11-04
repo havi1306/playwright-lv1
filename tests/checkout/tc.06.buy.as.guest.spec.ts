@@ -8,7 +8,7 @@ const billingDetails = {
     streetAddress: '123 TQT',
     city: 'Da Nang',
     state: 'California',
-    zipCode: '',
+    zipCode: '12345',
     phoneNumber: '123-456-7890',
     emailAddress: 'vi.pham@agest.vn'
 };

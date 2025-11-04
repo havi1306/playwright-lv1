@@ -14,7 +14,7 @@ const billingDetails = {
     emailAddress: ''
 };
 
-test('TC07 | Ensure proper error handling when mandatory fields are blank', async ({ homePage, myAccountPage, productCategoryPage, productDetailPage, cartPage, checkoutPage, orderStatusPage }) => {
+test('TC07 | Ensure proper error handling when mandatory fields are blank', async ({ homePage, myAccountPage, productCategoryPage, productDetailPage, cartPage, checkoutPage }) => {
     await homePage.navigateToHomePage();
     await homePage.goToMyAccount();
     await myAccountPage.logIn(username, password);

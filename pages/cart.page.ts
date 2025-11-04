@@ -78,7 +78,7 @@ class CartPage extends BasePage {
         this.page.on('dialog', dialog => dialog.accept());
     }
 
-    async shouldCartEmtyMessageDisplayed(): Promise<void> {
+    async shouldCartEmptyMessageDisplayed(): Promise<void> {
         await expect(this.cartEmptyMessage).toBeVisible();
     }
 

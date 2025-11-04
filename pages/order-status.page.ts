@@ -28,7 +28,7 @@ class OrderStatusPage extends BasePage {
             .isVisible();
     }
 
-    async shouldOrderMutipleDetailsCorrect(products: Product[]): Promise<void> {
+    async shouldOrderDetailsDisplayed(products: Product[]): Promise<void> {
         for (const product of products) {
             await this.shouldOrderDetailsCorrect(product);
         }
